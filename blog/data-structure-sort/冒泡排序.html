@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+
+<body>
+  <script>
+    // 冒泡排序
+    const arr = [1, 4, 5, 8, 9, 2, 4, 79, 43, 57, 42];
+    function bubbleSort(arr) {
+      for (let i = 0; i < arr.length; i++) {
+        // 注意j变量的取值范围
+        for (let j = 0; j < arr.length - i - 1; j++) {
+          if (arr[j + 1] < arr[j]) {
+            [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]]
+          }
+        }
+      }
+      return arr
+    }
+    console.log(bubbleSort(arr));
+
+    // 设置缓存pos
+    // 设置一标志性变量 pos,用于记录每趟排序中最后一次进行交换的位置。 
+    // 由于 pos 位置之后的记录均已交换到位,故在进行下一趟排序时只要扫描到 pos 位置即可。
+    // 对于一个本身有序的序列，或则序列后面一大部分都是有序的序列节省开销
+    function bubbleSort2(arr) {
+      let i = arr.length - 1;
+
+      while (i > 0) {
+        let pos = 0
+        for (let j = 0; j < i; j++) {
+          if (arr[j] > arr[j + 1]) {
+            pos = j
+            [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]]
+          }
+        }
+        i = pos
+      }
+      return arr
+    }
+    console.log(bubbleSort2(arr));
+
+    // 双向遍历
+    function bubbleSort3(arr) {
+      let start = 0
+      let end = arr.length - 1
+
+      while (start < end) {
+        for (let i = start; i < end; i++) {
+          if (arr[i] > arr[i + 1]) {
+            [arr[i], arr[i + 1]] = [arr[i + 1], arr[i]]
+          }
+        }
+        // 遍历完成则减1,减少下次遍历无用的扫描
+        end -= 1
+        for (let i = end; i > start; i--) {
+          if (arr[i - 1] > arr[i]) {
+            [arr[i], arr[i - 1]] = [arr[i - 1], arr[i]]
+          }
+        }
+        start += 1
+      }
+
+      return arr
+    }
+    console.log(bubbleSort3(arr));
+
+    // 结合缓存pos和双向遍历
+    function bubbleSort4(arr) {
+      let start = 0
+      let end = arr.length - 1
+      while (start < end) {
+        let endPos = 0
+        let startPos = 0
+        for (let i = start; i < end; i++) {
+          if (arr[i] > arr[i + 1]) {
+            endPos = i
+            [arr[i], arr[i + 1]] = [arr[i + 1], arr[i]]
+          }
+        }
+        end = endPos
+        for (let i = end; i > start; i--) {
+          if (arr[i - 1] > arr[i]) {
+            startPos = i
+            [arr[i], arr[i - 1]] = [arr[i - 1], arr[i]]
+          }
+        }
+        start = startPos
+      }
+      return arr
+    }
+    console.log(bubbleSort4(arr));
+
+    // 对于冒泡排序来说，能不能传入第二个参数（参数为函数），来控制升序和降序？（联想一下 array.sort()）
+    function bubbleSort5(arr, func) {
+      for (let i = 0; i < arr.length - 1; i++) {
+        for (let j = 0; j < arr.length - 1 - i; j++) {
+          if (func(arr[j], arr[j + 1]) > 0) {
+            [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]]
+          }
+        }
+      }
+      return arr
+    }
+    console.log(bubbleSort5(arr, (a, b) => a - b));
+    console.log(bubbleSort5(arr, (a, b) => b - a));
+  </script>
+</body>
+
+</html>

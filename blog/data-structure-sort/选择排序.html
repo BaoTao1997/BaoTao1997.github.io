@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+
+<body>
+  <script>
+    // 选择排序--找最小值索引
+    const arr = [91, 60, 96, 7, 35, 65, 10, 65, 9, 30, 20, 31, 77, 81, 24]
+    function selectionSort(arr) {
+      for (let i = 0, len = arr.length; i < len - 1; i++) {
+        let minIndex = i
+        for (let j = i + 1; j < len; j++) {
+          if (arr[j] < arr[minIndex]) {
+            minIndex = j
+          }
+        }
+        if (i !== minIndex) {
+          [arr[i], arr[minIndex]] = [arr[minIndex], arr[i]]
+        }
+      }
+      return arr
+    }
+    console.log(selectionSort(arr))
+
+    // 选择排序--找最大值索引
+    function selectionSort2(arr) {
+      for (let i = arr.length - 1; i > 0; i--) {
+        let maxIndex = i;
+
+        for (let j = i - 1; j >= 0; j--) {
+          if (arr[j] > arr[maxIndex]) {
+            maxIndex = j;
+          }
+        }
+        if (i !== maxIndex) {
+          swap(arr, i, maxIndex);
+        }
+      }
+
+      return arr;
+    }
+    console.log(selectionSort2(arr))
+  </script>
+</body>
+
+</html>

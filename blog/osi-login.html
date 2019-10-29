@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Web登录鉴权 | BaoTao的前端日志</title>
+    <meta name="description" content="欢迎访问我的前端日志">
+    <link rel="icon" href="/hero.png">
+    
+    <link rel="preload" href="/assets/css/0.styles.1a992bd3.css" as="style"><link rel="preload" href="/assets/js/app.f225858c.js" as="script"><link rel="preload" href="/assets/js/2.672550d7.js" as="script"><link rel="preload" href="/assets/js/36.56d7c6c2.js" as="script"><link rel="prefetch" href="/assets/js/10.c2729db0.js"><link rel="prefetch" href="/assets/js/11.6652c16a.js"><link rel="prefetch" href="/assets/js/12.c99151b5.js"><link rel="prefetch" href="/assets/js/13.c20a05a6.js"><link rel="prefetch" href="/assets/js/14.1ef90bc5.js"><link rel="prefetch" href="/assets/js/15.48e33afe.js"><link rel="prefetch" href="/assets/js/16.9480cdd8.js"><link rel="prefetch" href="/assets/js/17.2dbe7a92.js"><link rel="prefetch" href="/assets/js/18.d2ff3f51.js"><link rel="prefetch" href="/assets/js/19.bad3ad9a.js"><link rel="prefetch" href="/assets/js/20.f54ae634.js"><link rel="prefetch" href="/assets/js/21.fad4d162.js"><link rel="prefetch" href="/assets/js/22.8ce49b77.js"><link rel="prefetch" href="/assets/js/23.191fcec1.js"><link rel="prefetch" href="/assets/js/24.5d911dd7.js"><link rel="prefetch" href="/assets/js/25.92e6ee1b.js"><link rel="prefetch" href="/assets/js/26.2e6ac599.js"><link rel="prefetch" href="/assets/js/27.771ef2ee.js"><link rel="prefetch" href="/assets/js/28.9ddf0721.js"><link rel="prefetch" href="/assets/js/29.3deeede2.js"><link rel="prefetch" href="/assets/js/3.5f2ab74c.js"><link rel="prefetch" href="/assets/js/30.fe8bff52.js"><link rel="prefetch" href="/assets/js/31.1858abcd.js"><link rel="prefetch" href="/assets/js/32.bfb29c32.js"><link rel="prefetch" href="/assets/js/33.a2ae8076.js"><link rel="prefetch" href="/assets/js/34.531e6b81.js"><link rel="prefetch" href="/assets/js/35.645bc314.js"><link rel="prefetch" href="/assets/js/37.6ea9bf2e.js"><link rel="prefetch" href="/assets/js/38.2c569e14.js"><link rel="prefetch" href="/assets/js/39.0fbb6fc9.js"><link rel="prefetch" href="/assets/js/4.43a614f9.js"><link rel="prefetch" href="/assets/js/40.a2e40f8e.js"><link rel="prefetch" href="/assets/js/41.8de6a957.js"><link rel="prefetch" href="/assets/js/42.f34c83ed.js"><link rel="prefetch" href="/assets/js/43.5124ce0a.js"><link rel="prefetch" href="/assets/js/44.5148b76a.js"><link rel="prefetch" href="/assets/js/45.0482d6c2.js"><link rel="prefetch" href="/assets/js/46.dca6e042.js"><link rel="prefetch" href="/assets/js/47.d3d60350.js"><link rel="prefetch" href="/assets/js/48.c5d4232b.js"><link rel="prefetch" href="/assets/js/49.23efdb3a.js"><link rel="prefetch" href="/assets/js/5.c06abc86.js"><link rel="prefetch" href="/assets/js/50.143a9543.js"><link rel="prefetch" href="/assets/js/51.67b5b689.js"><link rel="prefetch" href="/assets/js/52.0a3fb16a.js"><link rel="prefetch" href="/assets/js/6.13d9ab35.js"><link rel="prefetch" href="/assets/js/7.d11a37f8.js"><link rel="prefetch" href="/assets/js/8.69f4770c.js"><link rel="prefetch" href="/assets/js/9.3a968c29.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.1a992bd3.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">BaoTao的前端日志</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/blog/" class="nav-link router-link-active">博客</a></div><div class="nav-item"><a href="/interview/" class="nav-link">面试题</a></div><div class="nav-item"><a href="/book/" class="nav-link">阅读</a></div><div class="nav-item"><a href="/project/" class="nav-link">项目</a></div><div class="nav-item"><a href="/resume/" class="nav-link">简历</a></div> <a href="https://github.com/BaoTao1997" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/blog/" class="nav-link router-link-active">博客</a></div><div class="nav-item"><a href="/interview/" class="nav-link">面试题</a></div><div class="nav-item"><a href="/book/" class="nav-link">阅读</a></div><div class="nav-item"><a href="/project/" class="nav-link">项目</a></div><div class="nav-item"><a href="/resume/" class="nav-link">简历</a></div> <a href="https://github.com/BaoTao1997" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>前端工程化与设计模式</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/blog/engineering-optimize.html" class="sidebar-link">web性能优化</a></li><li><a href="/blog/pattern-pub_sub.html" class="sidebar-link">订阅发布模式和EventEmitter</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Framework</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/blog/framework-mvvm.html" class="sidebar-link">动手实现一个简单的MVVM</a></li><li><a href="/blog/framework-vue_curd.html" class="sidebar-link">Vue的增删改查</a></li><li><a href="/blog/framework-vue-lazyload.html" class="sidebar-link">从Vue-lazyload看图片懒加载</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>网络协议</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/blog/osi-tcp.html" class="sidebar-link">TCP连接</a></li><li><a href="/blog/osi-status_code.html" class="sidebar-link">HTTP状态码解析</a></li><li><a href="/blog/osi-http_header.html" class="sidebar-link">HTTP报文解析</a></li><li><a href="/blog/osi-safety.html" class="sidebar-link">Web安全</a></li><li><a href="/blog/osi-login.html" class="active sidebar-link">Web登录鉴权</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blog/osi-login.html#web登录鉴权" class="sidebar-link">Web登录鉴权</a></li><li class="sidebar-sub-header"><a href="/blog/osi-login.html#_1-使用-session-授权" class="sidebar-link">1. 使用 session 授权</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blog/osi-login.html#_1-1-session-原理：" class="sidebar-link">1.1 session 原理：</a></li><li class="sidebar-sub-header"><a href="/blog/osi-login.html#_1-2-express-session-api：" class="sidebar-link">1.2 express-session API：</a></li><li class="sidebar-sub-header"><a href="/blog/osi-login.html#_1-3-使用-express-session" class="sidebar-link">1.3 使用 express-session</a></li></ul></li><li class="sidebar-sub-header"><a href="/blog/osi-login.html#_2-使用-jwt-授权" class="sidebar-link">2. 使用 JWT 授权</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blog/osi-login.html#_2-1-jwt-的原理：" class="sidebar-link">2.1 JWT 的原理：</a></li><li class="sidebar-sub-header"><a href="/blog/osi-login.html#_2-2-使用-jsonwebtoken-来实现-jwt-用户授权：" class="sidebar-link">2.2 使用 jsonwebtoken 来实现 JWT 用户授权：</a></li><li class="sidebar-sub-header"><a href="/blog/osi-login.html#_2-3-开始使用-jsonwebtoken：" class="sidebar-link">2.3 开始使用 jsonwebtoken：</a></li></ul></li><li class="sidebar-sub-header"><a href="/blog/osi-login.html#_3-使用-oauth-2-0-授权：" class="sidebar-link">3. 使用 OAuth 2.0 授权：</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blog/osi-login.html#_3-1-oauth-2-0-是什么" class="sidebar-link">3.1 OAuth 2.0 是什么</a></li><li class="sidebar-sub-header"><a href="/blog/osi-login.html#_3-2-使用-github-oauth-来登录我们的项目客户端" class="sidebar-link">3.2 使用 GitHub OAuth 来登录我们的项目客户端</a></li></ul></li><li class="sidebar-sub-header"><a href="/blog/osi-login.html#总结" class="sidebar-link">总结</a></li></ul></li><li><a href="/blog/osi-cache.html" class="sidebar-link">浏览器缓存策略</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>数据结构与算法</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/blog/data-structure-sort.html" class="sidebar-link">排序算法</a></li><li><a href="/blog/data-structure-binarytree.html" class="sidebar-link">二叉树</a></li><li><a href="/blog/data-structure-linkList.html" class="sidebar-link">链表</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>CSS</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/blog/css-repaint.html" class="sidebar-link">CSS的repaint和reflow</a></li><li><a href="/blog/css-self-adaption.html" class="sidebar-link">CSS自适应</a></li><li><a href="/blog/css-tips.html" class="sidebar-link">CSS技巧</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>JS</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/blog/js-regex.html" class="sidebar-link">正则表达式</a></li><li><a href="/blog/js-prototype.html" class="sidebar-link">JS原型链与原型</a></li><li><a href="/blog/js-promise.html" class="sidebar-link">手写符合Promise/A+的Promise</a></li><li><a href="/blog/js-eventloop.html" class="sidebar-link">JS事件循环</a></li><li><a href="/blog/js-typescript.html" class="sidebar-link">TypeScript 在Vue项目中的使用总结</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>运维与多人协作</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/blog/operation-git.html" class="sidebar-link">Git常规操作与Linux命令</a></li><li><a href="/blog/operation-blog.html" class="sidebar-link">搭建持续集成的个人博客</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h2 id="web登录鉴权"><a href="#web登录鉴权" aria-hidden="true" class="header-anchor">#</a> Web登录鉴权</h2> <p>我们将用 express 搭建一个简单的后端，为了保存用户信息，我们使用 mongoDB。前端是一个注册页面和一个登录页面，此外还有一个修改用户密码的页面，在这个页面上修改密码的操作只有在用户登录之后才被允许，也就是被服务端授权之后才能修改密码，否则返回 401 未授权。</p> <h2 id="_1-使用-session-授权"><a href="#_1-使用-session-授权" aria-hidden="true" class="header-anchor">#</a> 1. 使用 session 授权</h2> <h3 id="_1-1-session-原理："><a href="#_1-1-session-原理：" aria-hidden="true" class="header-anchor">#</a> 1.1 session 原理：</h3> <p>利用 session 来验证用户，有两种机制实现。</p> <blockquote><ol><li>需要服务端在用户登录成功后生成一个 session ID 保存在服务端，这个session ID 标识当前会话的用户，以后用户的每一次请求中都会包含session ID，服务端可以识别这个 session ID 验证用户身份然后才会授权。</li></ol></blockquote> <blockquote><ol><li>把 session ID 和其他数据加密后发给用户，由用户来存储并在以后每次请求中发给服务端来验证。比如可以用 cookie 存储发送，也可以使用其他客户端存储。</li></ol></blockquote> <h3 id="_1-2-express-session-api："><a href="#_1-2-express-session-api：" aria-hidden="true" class="header-anchor">#</a> 1.2 express-session API：</h3> <p>本文使用 express-session 来实现。并且使用上述 session 的第一种机制。所以先来看一下 <a href="https://link.juejin.im?target=https%3A%2F%2Fwww.npmjs.com%2Fpackage%2Fexpress-session" target="_blank" rel="noopener noreferrer">express-session<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> 主要的 API：</p> <ul><li><p><strong>session( options )</strong>：生成 session 中间件，使用这个中间件会在当前会话中创建 session，session 数据将会被保存在服务端，而 session ID 会保存在 cookie。options 为传入的配置参数，有以下这些参数：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>1.  cookie：
+       存储 session ID，
+       默认值 { path: ‘/‘, httpOnly: true,secure: false, maxAge: null }）
+2.  genid：
+       一个函数，返回一个字符串用来作为新的 session ID，传入 req 可以按需在 req 上添加一些值。
+3.  name：
+       存储 session ID 的 cookie 的名字，默认是'connect.sid'，但是如果有多个使用 express-session 的 app 运行在同一个服务器主机上，需要用不同的名字命名  express-session 的 cookie。
+4.  proxy ：
+       当设置了secure cookies（通过”x-forwarded-proto” header ）时信任反向代理。
+5.  resave：
+       强制保存会话，即使会话在请求期间从未被修改过
+6.  rolling：
+       强制在每次响应时，都设置保存会话标识符的cookie。cookie 到期时间会被重置为原始时间 maxAge。默认值为`false`。
+7.  saveUninitialized：
+       默认 `true`, 强制存储未初始化的 session。
+8.  secret ( 必需 ）:
+       用来对session ID cookie签名，可以提供一个单独的字符串作为 secret，也可以提供一个字符串数组，此时只有第一个字符串才被用于签名，但是在 express-session 验证 session ID   的时候会考虑全部字符串。 
+9.  store:
+       存储 session 的实例。
+10. unset：
+       控制 req.session 是否取消。默认是 `keep`，如果是  `destroy`,那么 session 就会在响应结束后被终止。
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br></div></div></li> <li><p><strong>req.session</strong>：这是 express-session 存放 session 数据的地方，注意，只有 session ID 存储在 cookie，所以 express-session 会自动检查 cookie 中的 session ID ，并用这个 session ID 来映射到对应的 session 数据，所以使用 express-session 时我们只需读取 req.session ，express-session 知道应该读取哪个 session ID 标识的 session 数据。</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>1. 可以从 req.session 读取 session ：
+       req.session.id：每一个 session 都有一个唯一ID来标识，可以读取这个ID，而且只读不可更改，这是 req.sessionID 的别名；
+       req.session.cookie：每一个 session 都有一个唯一 的cookie来存储 session ID，可以通过 req.session.cookie 来设置 cookie 的配置项，比如 req.session.cookie.expires 设置为 false ，设置 req.session.cookie.maxAge 为某个时间。
+2. req.session 提供了这些方法来操作 session：
+       req.session.regenerate( callback (err) ): 生成一个新的 session, 然后调用 callback；
+       req.session.destroy( callback (err) ): 销毁 session，然后调用 callback；
+       req.session.reload( callback (err) ):  从 store 重载 session 并填充 req.session ，然后调用 callback；
+       req.session.save( callback (err) ): 将 session 保存到 store，然后调用 callback。这个是在每次响应完之后自动调用的，如果 session 有被修改，那么 store 中将会保存新的 session；
+       req.session.touch(): 用来更新 maxAge。
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div></li> <li><p><strong>req.sessionID</strong>：和 req.session.id 一样。</p></li> <li><p><strong>store</strong>：如果配置这个参数，可以将 session 存储到 redis和mangodb 。<a href="https://link.juejin.im?target=https%3A%2F%2Fgithub.com%2Ftj%2Fconnect-redis" target="_blank" rel="noopener noreferrer">一个使用 rtedis 存储 session 的例子<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>。store 提供了一下方法来操作 store：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>1. store.all( callback (error, sessions) ) ：
+       返回一个存储store的数组；
+2. store.destroy(sid, callback(error))：
+       用session ID 来销毁 session；
+3. store.clear(callback(error))：
+       删除所有 session
+4. store.length(callback(error, len))：
+       获取 store 中所有的 session 的数目
+5. store.get(sid, callbackcallback(error, session))：
+       根据所给的 ID 获取一个 session
+6. store.set(sid, session, callback(error))：
+       设置一个 session。
+7. store.touch(sid, session, callback(error))：
+        更新一个 session
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br></div></div></li></ul> <p>以上就是 express-session 的全部 API。</p> <h3 id="_1-3-使用-express-session"><a href="#_1-3-使用-express-session" aria-hidden="true" class="header-anchor">#</a> 1.3 使用 express-session</h3> <p><em>重点中的重点，巨坑中的巨坑</em>：使用 express-session 是依赖于 cookie 来存储 session ID 的，而 session ID 用来唯一标识一个会话，如果要在一个会话中验证当前会话的用户，那么就要求用户前端能够发送 cookie，而且后端能够接收 cookie。所以前端我们设置 axios 的 withCredentials = true 来设置 axios 可以发送 cookie，后端我们需要设置响应头 Access-Control-Allow-Credentials:true，并且同时设置 Access-Control-Allow-Origin 为前端页面的服务器地址，而不能是<code>*</code>。我们可以用 cors 中间件代替设置：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>// 跨域
+
+app.use(cors({
+  credentials:  true,
+  origin:  'http://localhost:8082',  // web前端服务器地址，，不能设置为 * 
+}))
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><p>关于注册的逻辑，是一个很简单的用户注册信息填写页面，它发送用户的名字和密码到后端注册接口，后端注册接口保存用户的名字和密码到数据库理。因此我在这里省略掉前端注册页面和后端注册接口，只讲前端登录页面和后端登录接口，前端修改密码页面和后端修改密码接口和登出接口。</p> <ul><li><ol><li>前端登录接口：</li></ol></li></ul> <div class="language- line-numbers-mode"><pre class="language-text"><code>async function login(){ // 登录
+         
+        let res = await axios.post('http://localhost:3002/login',{username,password})
+        if(res.data.code === 0){
+            setLoginSeccess(true)
+            alert('登录成功,请修改密码')
+            
+        }else if(res.data.code === 2){
+            alert('密码不正确')
+            return
+        }else if(res.data.code === 1){
+            alert('没有该用户')
+            return
+        }
+    }
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br></div></div><ul><li><ol><li>后端登录接口：</li></ol></li></ul> <div class="language- line-numbers-mode"><pre class="language-text"><code>const getModel = require('../db').getModel
+const router = require('express').Router()
+const users = getModel('users')
+
+router.post('/', (req,res,next)=&gt;{
+    let {username, password} = req.body
+    users.findOne({username},(err,olduser)=&gt;{
+        if(!olduser){
+            res.send({code:1})// 没有该用户
+        }else{
+            if(olduser.password === password){// 登陆成功，生成 session
+                req.session.username = olduser.username
+                req.session.userID = olduser._id
+                console.log('登录时的会话 ID：',req.sessionID)
+                req.session.save()
+                res.send({code:0})// 登录成功
+            }else{
+
+                res.send({code:2}) // 密码错误
+            }
+        }
+    })
+})
+
+module.exports = router
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br></div></div><ul><li><ol><li>前端修改密码和登出页面：</li></ol></li></ul> <div class="language- line-numbers-mode"><pre class="language-text"><code>// src/axios.config.js:
+
+// 支持 express-session 的 axios 配置
+export function axios_session(){
+    axios.defaults.withCredentials = true
+    return axios
+}
+async function modify(){ // 修改密码
+       if(!input.current.value) return alert('请输入新密码')
+       try{
+           // 支持 session 的 axios 调用
+           let res = await axios_session().post('http://localhost:3002/modify',{newPassword:input.current.value})
+           if(res.data.code === 0)
+               alert('密码修改成功')
+       }catch(err){
+           alert('没有授权 401')  
+           console.log(err)
+       }
+}
+async function logout(){ // 登出
+        let res = await axios.post('http://localhost:3002/logout')
+        if(res.data.code === 0){
+            history.back()
+        }
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br></div></div><ul><li><ol><li>后端修改密码接口：</li></ol></li></ul> <div class="language- line-numbers-mode"><pre class="language-text"><code>const getModel = require('../db').getModel
+const router = require('express').Router()
+const users = getModel('users')
+const sessionAuth = require('../middlewere/sessionAuth') 
+
+router.post('/', sessionAuth, (req,res,next)=&gt;{
+    let {newPassword} = req.body
+    console.log('修改密码时的会话 ID：',req.session.id)
+    if(req.session.username){
+        users.findOne({username: req.session.username},(err,olduser)=&gt;{
+            olduser.password = newPassword
+            olduser.save(err=&gt;{
+                if(!err){
+                    res.send({code:0})// 修改密码成功
+                }
+            })
+        })
+    }
+})
+
+module.exports = router
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br></div></div><p>sessionAuth 验证中间件：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>const sessionAuth = (req,res,next)=&gt;{
+    if(req.session &amp;&amp; req.session.username){// 验证用户成功则进入下一个中间件来修改密码
+        next()
+    }else{// 验证失败返回 401
+        res.sendStatus(401)
+    }
+}
+
+module.exports = sessionAuth
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><ul><li><ol><li>后端登出：</li></ol></li></ul> <div class="language- line-numbers-mode"><pre class="language-text"><code>const router = require('express').Router()
+ 
+router.post('/', (req,res,next)=&gt;{
+    req.session.destroy(()=&gt;console.log('销毁session，已经推出登录'))
+    res.send({code:0})
+})
+
+module.exports = router
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div><p>我们还需要调用 session 的中间件，配置一些参数，才能在之后的中间件中使用 req.session 来进行存储、读取和销毁 session 的操作：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>// server/app.js:
+
+// session
+app.use(session({
+    secret: '123456789',// 必需，用来签名 session
+    unset:'destroy',// 在每次会话就熟后销毁 session
+    resave:true,
+    saveUninitialized:false,
+    rolling:true,
+    cookie:{
+        maxAge:60*60*1000// session ID 有效时间
+    }
+
+}))
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br></div></div><h2 id="_2-使用-jwt-授权"><a href="#_2-使用-jwt-授权" aria-hidden="true" class="header-anchor">#</a> 2. 使用 JWT 授权</h2> <h3 id="_2-1-jwt-的原理："><a href="#_2-1-jwt-的原理：" aria-hidden="true" class="header-anchor">#</a> 2.1 JWT 的原理：</h3> <p>首先来看看 JWT 的概念，JWT 的 token 由 头部(head)、数据(payload)、签名(signature) 3个部分组成 具体每个部分的结构组成以及JWT更深的讲解可以看看<a href="https://link.juejin.im?target=https%3A%2F%2Fauth0.com%2Flearn%2Fjson-web-tokens%2F" target="_blank" rel="noopener noreferrer">这个<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>。其中头部（header）和数据（payload）经过 base64 编码后经过秘钥 secret的签名，就生成了第三部分----签名(signature) ，最后将 base64 编码的 header 和 payload 以及 signature 这3个部分用圆点 . 连接起来就生成了最终的 token。</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>  signature = HMACSHA256(base64UrlEncode(header) + &quot;.&quot; + base64UrlEncode(payload), secret)
+  token = base64UrlEncode(header) + &quot;.&quot; + base64UrlEncode(payload) + signature
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>token 生成之后，可以将其发送给客户端，由客户端来存储并在以后每次请求中发送会后端用于验证用户。前端存储和发送 token 的方式有以下两种：</p> <h4 id="_2-1-1-使用-header-authorization-localstorage-存储和发送-token"><a href="#_2-1-1-使用-header-authorization-localstorage-存储和发送-token" aria-hidden="true" class="header-anchor">#</a> 2.1.1 使用 Header.Authorization + localStorage 存储和发送 token</h4> <p>在 localStorage 中存储 token，通过请求头 Header 的 Authorization 字段将 token发送给后端。</p> <p>这种方法可以避免 CSRF 攻击，因为没有使用 cookie ，在 cookie 中没有 token，而 CSRF 就是基于 cookie 来攻击的。虽然没有 CSRF ，但是这种方法容易被 XSS 攻击，因为 XSS 可以攻击 localStorage ，从中读取到 token，如果 token 中的 head 和 payload 部分没有加密，那么攻击者只要将 head 和 payload 的 base64 形式解码出来就可以看到head 和payload 的明文了。这个时候，如果 payload 保护敏感信息，我们可以加密 payload。</p> <h4 id="_2-1-2-使用-cookie-存储和发送-token："><a href="#_2-1-2-使用-cookie-存储和发送-token：" aria-hidden="true" class="header-anchor">#</a> 2.1.2 使用 cookie 存储和发送 token：</h4> <p>在这种情况下，我们需要使用 httpOnly 来使客户端脚本无法访问到 cookie，才能保证 token 安全。这样就避免了 CSRF 攻击。</p> <h3 id="_2-2-使用-jsonwebtoken-来实现-jwt-用户授权："><a href="#_2-2-使用-jsonwebtoken-来实现-jwt-用户授权：" aria-hidden="true" class="header-anchor">#</a> 2.2 使用 jsonwebtoken 来实现 JWT 用户授权：</h3> <p><a href="https://link.juejin.im?target=https%3A%2F%2Fwww.npmjs.com%2Fpackage%2Fjsonwebtoken" target="_blank" rel="noopener noreferrer">jsonwebtoken<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> 主要 API：</p> <h4 id="_1-jwt-sign-payload-secretorprivatekey-options-callback-用于签发-token"><a href="#_1-jwt-sign-payload-secretorprivatekey-options-callback-用于签发-token" aria-hidden="true" class="header-anchor">#</a> 1. <strong>jwt.sign(payload, secretOrPrivateKey, [options, callback]) 用于签发 token</strong></h4> <p>如果有 callback 将异步的签名 token。</p> <p>payload 就是我们要在 token 上装载的数据，比如我们可以在上面添加用户ID，用于数据库查询。payload可以是一个object, buffer或者string，payload 如果是 object，可以在里面设置 exp 过期时间。</p> <p>secretOrPrivateKey 即包含HMAC算法的密钥或RSA和ECDSA的PEM编码私钥的string或buffer，是我们用于签名 token 的密钥，secretOrPublicKey 应该和下面 的 jwt.verify 的 secretOrPublicKey 一致。</p> <p>options 的参数有：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>  1）algorithm (default: HS256) 签名算法，这个算法和下面将要讲的 jwt.verify 所用的算法一个一致
+  2）expiresIn: 以秒表示或描述时间跨度zeit / ms的字符串。如60，&quot;2 days&quot;，&quot;10h&quot;，&quot;7d&quot;，含义是：过期时间
+  3）notBefore: 以秒表示或描述时间跨度zeit / ms的字符串。如：60，&quot;2days&quot;，&quot;10h&quot;，&quot;7d&quot;
+  4）audience：Audience，观众
+  5）issuer: Issuer，发行者
+  6）jwtid: JWT ID
+  7）subject: Subject，主题
+  8）noTimestamp:
+  9）header
+  10）keyid
+  11）mutatePayload
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br></div></div><h4 id="_2-jwt-verify-token-secretorpublickey-options-callback-用于验证-token"><a href="#_2-jwt-verify-token-secretorpublickey-options-callback-用于验证-token" aria-hidden="true" class="header-anchor">#</a> 2. <strong>jwt.verify(token, secretOrPublicKey, [options, callback]) 用于验证 token</strong></h4> <p>如果有 callback 将异步的验证 token。</p> <p>token 便是我们保存在前端的token，我们将它发送给后端，后端调用 jwt.verify 并接受 token 和传入放在后端的 secretOrPublicKey 来验证 token。注意这里的 secretOrPublicKey 与之前用于签发 token 的 secretOrPublicKey 应该是同一个。</p> <p>options 的参数有：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>  1）algorithms: 一个包含签名算法的数组，比如  [&quot;HS256&quot;, &quot;HS384&quot;].
+  2）audience: if you want to check audience (aud), provide a value here. The audience can be checked against a string, a regular expression or a list of strings and/or regular expressions.
+  Eg: &quot;urn:foo&quot;, /urn:f[o]{2}/, [/urn:f[o]{2}/, &quot;urn:bar&quot;]
+
+  3）complete: return an object with the decoded { payload, header, signature } instead of only the usual content of the payload.
+  4）issuer (optional): string or array of strings of valid values for the iss field.
+  5）ignoreExpiration: if true do not validate the expiration of the token.
+  6）ignoreNotBefore...
+  7）subject: if you want to check subject (sub), provide a value here
+  8）clockTolerance: number of seconds to tolerate when checking the nbf and exp claims, to deal with small clock differences among different servers
+  9）maxAge: the maximum allowed age for tokens to still be valid. It is expressed in seconds or a string describing a time span zeit/ms.
+  Eg: 1000, &quot;2 days&quot;, &quot;10h&quot;, &quot;7d&quot;. A numeric value is interpreted as a seconds count. If you use a string be sure you provide the time units (days, hours, etc), otherwise milliseconds unit is used by default (&quot;120&quot; is equal to &quot;120ms&quot;).
+
+  10）clockTimestamp: the time in seconds that should be used as the current time for all necessary comparisons.
+  11）nonce: if you want to check nonce claim, provide a string value here. It is used on Open ID for the ID Tokens. (Open ID implementation notes)
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br></div></div><h4 id="_3-jwt-decode-token-options-解码-token"><a href="#_3-jwt-decode-token-options-解码-token" aria-hidden="true" class="header-anchor">#</a> 3. <strong>jwt.decode(token [, options]) 解码 token</strong></h4> <p>只是解码 token 中的 payload，不会验证 token。 options 参数有:</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>  1）json: 强制在 payload 用JSON.parse 序列化，即使头部没有声明 &quot;typ&quot;:&quot;JWT&quot;  
+  2）complete: true 则返回解码后的包含  payload 和 header  的对象.
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><h4 id="_4-错误码"><a href="#_4-错误码" aria-hidden="true" class="header-anchor">#</a> 4. <strong>错误码</strong></h4> <p>在验证 token 的过程中可能或抛出错误，jwt.verify() 的回调的第一个参数就是 err,err 对象有一下几种类型：</p> <ol><li><strong>TokenExpiredError:</strong></li></ol> <div class="language- line-numbers-mode"><pre class="language-text"><code>   err = {
+        name: 'TokenExpiredError',
+        message: 'jwt expired',
+        expiredAt: 1408621000
+      }
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><ol><li><strong>JsonWebTokenError：</strong></li></ol> <div class="language- line-numbers-mode"><pre class="language-text"><code>err = {
+        name: 'JsonWebTokenError',
+        message: 'jwt malformed'
+        /*
+          message 有以下几个可能的值：
+            'jwt malformed'
+            'jwt signature is required'
+            'invalid signature'
+            'jwt audience invalid. expected: [OPTIONS AUDIENCE]'
+            'jwt issuer invalid. expected: [OPTIONS ISSUER]'
+            'jwt id invalid. expected: [OPTIONS JWT ID]'
+            'jwt subject invalid. expected: [OPTIONS SUBJECT]'
+      */
+      }
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br></div></div><ol><li><strong>NotBeforeError：</strong></li></ol> <div class="language- line-numbers-mode"><pre class="language-text"><code>err = {
+        name: 'NotBeforeError',
+        message: 'jwt not active',
+        date: 2018-10-04T16:10:44.000Z
+      }
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><h4 id="_5-jsonwebtoken-的签名算法"><a href="#_5-jsonwebtoken-的签名算法" aria-hidden="true" class="header-anchor">#</a> 5. jsonwebtoken 的签名算法</h4> <p>HS256、HS384、HS512、RS256 等。</p> <h3 id="_2-3-开始使用-jsonwebtoken："><a href="#_2-3-开始使用-jsonwebtoken：" aria-hidden="true" class="header-anchor">#</a> 2.3 开始使用 jsonwebtoken：</h3> <p>后端登录接口现在需要改用 JWT 来签发 token，把原来使用 express-session 的代码去掉：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>if(olduser.password === password){// 密码正确
+ 
+                /*
+                
+                // 授权方法 1. session 
+                req.session.username = olduser.username
+                req.session.userID = olduser._id
+                console.log('登录时的会话 ID：',req.sessionID)
+                req.session.cookie.maxAge = 60*60*1000
+                req.session.save()
+                res.send({code:0})// 登录成功
+
+                */
+
+                // 授权方法 2. JWT
+                let token = JWT.sign(
+                    {username:olduser.username, exp:Date.now() + 1000 * 60}, // payload
+                    secret, // 签名密钥
+                    {algorithm} // 签名算法
+                )
+                res.send({
+                    code:0,
+                    token
+                })
+                
+            }else{
+
+                res.send({code:2}) // 密码错误
+            }
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br></div></div><p>后端给前端发回了 token，前端需要存储 token 以便于后续请求授权，可以存储在 localStorage ,在修改密码页面再取出 localStorage 中 的 token，并再 axios 发送请求之前拦截请求，在请求头的 Authorization 中带上 token：</p> <p>前端存储 token：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>// src/pages/login.js:
+
+alert('登录成功,请修改密码')
+localStorage.setItem('token',res.data.token)
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><p>前端拦截 axios 请求，从 localStorage 中取出保存好的 token，在请求头带上 token：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>// src/axios.config.js:
+
+// 支持 JWT 的 axios 配置
+export  function axios_JWT(){
+    axios.interceptors.request.use(config =&gt; {
+        // 在 localStorage 获取 token
+        let token = localStorage.getItem(&quot;token&quot;);
+        console.log('axios配置:token',token)
+        // 如果存在则设置请求头
+        if (token) {
+            config.headers['Authorization'] = token;
+            console.log(config)
+        }
+        return config;
+    });
+    return axios
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br></div></div><p>前端修改密码页面调用可以拦截请求的 aios 来发送修改密码的请求：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>// src/pages/ModifyUserInfo.js:
+
+ // 支持 JWT 的 axios 调用
+           let res = await axios_JWT().post('http://localhost:3002/modify',{newPassword:input.current.value})
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><p>后端修改密码接口调用 JWT 的用户认证中间件：</p> <p>认证中间件：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>const JWT = require('jsonwebtoken')
+const secret = require('../server.config').JWT_config.secret
+const algorithm = require('../server.config').JWT_config.algorithm
+
+
+function JWT_auth(req,res,next){
+    let authorization = req.headers[&quot;authorization&quot;]
+    console.log('authorization',authorization)
+    if(authorization)
+    try{
+        let token = authorization;
+        JWT.verify(token,secret,{algorithm:'HS256'},(err,decoded)=&gt;{ // 用户认证
+            if(err){
+                console.log(err)
+                next(err)
+            }else{
+                console.log(decoded)
+                req.username = decoded.username // 在 req 上添加 username,以便于传到下一个中间件取出 username 来查询数据库
+                next()
+            }
+        })
+
+    }catch(err){
+        res.status(401).send(&quot;未授权&quot;);
+    }
+    else
+    res.status(401).send(&quot;未授权&quot;);
+}
+module.exports = JWT_auth
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br></div></div><h2 id="_3-使用-oauth-2-0-授权："><a href="#_3-使用-oauth-2-0-授权：" aria-hidden="true" class="header-anchor">#</a> 3. 使用 OAuth 2.0 授权：</h2> <h3 id="_3-1-oauth-2-0-是什么"><a href="#_3-1-oauth-2-0-是什么" aria-hidden="true" class="header-anchor">#</a> 3.1 OAuth 2.0 是什么</h3> <p>有的应用会提供第三方应用登录，比如掘金 web 客户端提供了微信、QQ账号登录，我们可以不用注册掘金账号，而可以用已有的微信账号登录掘金。看看用微信登录掘金的过程：</p> <blockquote><p>step1: 打开掘金，未登录状态，点击登录，掘金给我们弹出一个登录框，上面有微信、QQ登录选项，我们选择微信登录；
+step2: 之后掘金会将我们重定向到微信的登录页面，这个页面给出一个二维码供我们扫描，扫描之后；
+step3: 我们打开微信，扫描微信给的二维码之后，微信询问我们是否同意掘金使用我们的微信账号信息，我们点击同意；
+step4: 掘金刚才重定向到微信的二维码页面，现在我们同意掘金使用我们的微信账号信息之后，又重定向回掘金的页面，同时我们可以看到现在掘金的页面上显示我们已经处于登录状态，所以我们已经完成了用微信登录掘金的过程。</p></blockquote> <p>这个过程比我们注册掘金后才能登录要快捷多了。这归功于 OAuth2.0 ，它允许客户端应用（掘金）可以访问我们的资源服务器（微信），我们就是资源的拥有者，这需要我们允许客户端（掘金）能够通过认证服务器（在这里指微信，认证服务器和资源服务器可以分开也可以是部署在同一个服务上）的认证。很明显，OAuth 2.0 提供了4种角色，资源服务器、资源的拥有者、客户端应用 和 认证服务器，它们之间的交流实现了 OAuth 2.0 整个认证授权的过程。</p> <p>OAuth 2.0 登录的原理，根据4中不同的模式有所不同。本文使用授权码模式，所以只讲授权码模式下 OAuth2.0 的登录过程，其他模式可以自行搜索学习。</p> <h3 id="_3-2-使用-github-oauth-来登录我们的项目客户端"><a href="#_3-2-使用-github-oauth-来登录我们的项目客户端" aria-hidden="true" class="header-anchor">#</a> 3.2 使用 GitHub OAuth 来登录我们的项目客户端</h3> <p>可以参考<a href="https://link.juejin.im?target=https%3A%2F%2Fdeveloper.github.com%2Fapps%2Fbuilding-oauth-apps%2Fauthorizing-oauth-apps%2F" target="_blank" rel="noopener noreferrer">GitHub 官网<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>。 下面我们改用 OAuth2.0 来使用 GitHub 账号来授权我们上面的应用，从而修改我们应用的密码。</p> <p>步骤：</p> <ol><li>在 GitHub 上申请注册一个 OAuth application：<a href="https://link.juejin.im?target=https%3A%2F%2Fgithub.com%2Fsettings%2Fapplications%2Fnew%25E3%2580%2582" target="_blank" rel="noopener noreferrer">github.com/settings/ap…<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> 填写我们的应用名称、应用首页和授权需要的回调 URL：</li></ol> <p><img src="https://user-gold-cdn.xitu.io/2019/5/17/16ac1f9fb29bfa0a?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="img"></p> <ol><li>然后GitHub 生成了 Client ID 和 Client Secret：</li></ol> <p><img src="https://user-gold-cdn.xitu.io/2019/5/17/16ac1fa1c2f79bc6?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="img"></p> <p>这个登录入口其实就是一个指向 GitHub 登录页面的连接</p> <div class="language- line-numbers-mode"><pre class="language-text"><code> &lt;a href='https://github.com/login/oauth/authorize?client_id=211383cc22d28d9dac52'&gt; 使用 GitHub 账号登录 &lt;/a&gt;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><ol><li>用户进入上面的 GitHub 登录页面之后，可以输入自己的GitHub用户名和密码登录，然后 GitHub 会将授权码以回调形式传回之前我们设置的 <a href="https://link.juejin.im?target=http%3A%2F%2Flocalhost%3A3002%2Flogin%2Fcallback" target="_blank" rel="noopener noreferrer">http://localhost:3002/login/callback<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> 这个页面上，比如 <a href="https://link.juejin.im?target=http%3A%2F%2Flocalhost%3A3002%2Flogin%2Fcallback%3Fcode%3D37646a38a7dc853c8a77" target="_blank" rel="noopener noreferrer">http://localhost:3002/login/callback?code=37646a38a7dc853c8a77<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>, 我们可以在 <a href="https://link.juejin.im?target=http%3A%2F%2Flocalhost%3A3002%2Flogin%2Fcallback" target="_blank" rel="noopener noreferrer">http://localhost:3002/login/callback<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> 这个路由获取 code 授权码，并结合我们之前获得的 client-id、client_secret，向https://github.com/login/oauth/access_token请求token，token 获取之后，我们可以用这个 token向 <a href="https://link.juejin.im?target=https%3A%2F%2Fapi.github.com%2Fuser%3Faccess_token%3D%25E7%2594%25A8%25E6%2588%25B7%25E7%259A%2584token" target="_blank" rel="noopener noreferrer">api.github.com/user?access…<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> 请求到用户的GitHub账号信息比如GitHub用户名、头像等等。</li></ol> <div class="language- line-numbers-mode"><pre class="language-text"><code>// server/routes/login.js:
+
+// 使用 OAuth2.0 时的登录接口，
+router.get('/callback',async (req,res,next)=&gt;{//这是一个授权回调，用于获取授权码 code
+    var code = req.query.code; // GitHub 回调传回 code 授权码
+    console.log(code)
+    
+    // 带着 授权码code、client_id、client_secret 向 GitHub 认证服务器请求 token
+    let res_token = await axios.post('https://github.com/login/oauth/access_token',
+    {
+        client_id:Auth_github.client_id,
+        client_secret:Auth_github.client_secret,
+        code:code
+    })
+   console.log(res_token.data)
+
+   let token = res_token.data.split('=')[1].replace('&amp;scope','')
+   
+
+   // 带着 token 从 GitHub 获取用户信息
+   let github_API_userInfo = await axios.get(`https://api.github.com/user?access_token=${token}`)
+   console.log('github 用户 API：',github_API_userInfo.data)
+
+   let userInfo = github_API_userInfo.data
+
+   // 用户使用 GitHub 登录后，在数据库中存储 GitHub 用户名
+   users.findOne({username:userInfo.name},(err,oldusers)=&gt;{ // 看看用户之前有没有登录过，没有登录就会在数据库中新增 GitHub 用户
+    if(oldusers) {
+        res.cookie('auth_token',res_token.data)
+        res.cookie('userAvatar',userInfo.avatar_url)
+        res.cookie('username',userInfo.name)
+
+        res.redirect(301,'http://localhost:8082') // 从GitHub的登录跳转回我们的客户端页面
+        return
+    }else
+    new users({
+        username:userInfo.name,
+        password:'123', // 为使用第三方登录的能够用户初始化一个密码，后面用户可以自己去修改
+    }).save((err,savedUser)=&gt;{
+        if(savedUser){
+            res.cookie('auth_token',res_token.data)
+            res.cookie('userAvatar',userInfo.avatar_url)
+            res.cookie('username',userInfo.name)
+         
+            res.redirect(301,'http://localhost:8082') // 从GitHub的登录跳转回我们的客户端页面
+        }
+    })
+   })
+},
+)
+module.exports = router
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br></div></div><p>在请求到用户的GitHub信息之后，我们可以将用户头像和用户名存在cookie、里，便于发送给前端在页面上显示出来，告诉用户他已经用GitHub账号登录了我们的客户端。 同时，我们把GitHub用户名存到我们自己的数据库里，并给一个‘123’简单的初始化密码，后面用户可以在获得权限后修改密码。</p> <ol><li>接下来，我们使用GitHub登录后，我们需要获得授权以修改我们的密码。</li></ol> <p>我们使用和 JWT 一样的发送token的方式，前面我们从GitHub获得用户的token之后有已经用cookie的方式将其发送给前端，我们在前端可以读取cookie里的token，然后将其通过 Authorization 头方式给后端验证：</p> <p>前端读取 token，并加到  Authorization 里：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code> // OAuth2.0
+    axios.interceptors.request.use(config =&gt; {
+        // 在 localStorage 获取 token
+        let token = localStorage.getItem(&quot;token&quot;);
+        console.log('axios配置:token',token)
+        // 如果存在则设置请求头
+        if(document.cookie){
+            let OAtuh_token = unescape(document.cookie.split(';').filter(e=&gt;/auth_token/.test(e))[0].replace(/auth_token=/,''))
+            config.headers['Authorization'] = OAtuh_token;
+            console.log(config)
+        }
+       
+        return config;
+    });
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br></div></div><p>后端验证中间件 ：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>const axios = require('axios')
+
+const OAuth=async (req,res,next)=&gt;{
+    let OAuth_token = req.headers[&quot;authorization&quot;]
+    console.log('authorization',OAuth_token)
+    console.log('OAuth 中间件拿到cookie中的token：',OAuth_token)
+    if(OAuth_token) {
+        let token = OAuth_token.split('=')[1].replace('&amp;scope','')
+        let github_API_userInfo = await axios.get(`https://api.github.com/user?access_token=${token}`)
+        let username = github_API_userInfo.data.name
+        req.username = username
+        next()
+    }
+    else res.status(401)
+}
+module.exports = OAuth
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br></div></div><h2 id="总结"><a href="#总结" aria-hidden="true" class="header-anchor">#</a> 总结</h2> <p>session、JWT、OAuth2.0 这三种授权方式每一种里面都会有其他方式的影子，主要是体现在用户凭证的存储和发送上，比如通常所说的基于服务端的 session，它可以把用户凭证，也就是 session ID 存储在服务端（内存或者数据库redis等），但是也是可以发给前端通过cookie保存的。JWT 可以把作为用户凭证的 token 在服务端签发后发给用户保存，可以在 localStorage 保存，同样也可以保存在 cookie 。OAuth2.0是比较复杂的一种授权方式，但是它后面获得 token 后也可以像 JWT 一样处理 token 的保存和验证来授权用户。</p></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/BaoTao1997/edit/master/docs/blog/osi-login.md" target="_blank" rel="noopener noreferrer">帮助我完善这篇内容🙏</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+        ←
+        <a href="/blog/osi-safety.html" class="prev">
+          Web安全
+        </a></span> <span class="next"><a href="/blog/osi-cache.html">
+          浏览器缓存策略
+        </a>
+        →
+      </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.f225858c.js" defer></script><script src="/assets/js/2.672550d7.js" defer></script><script src="/assets/js/36.56d7c6c2.js" defer></script>
+  </body>
+</html>

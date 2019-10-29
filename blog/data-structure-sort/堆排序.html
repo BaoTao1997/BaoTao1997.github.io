@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    const arr = [4,6,8,5,9]
+    function heapSort(arr) {
+        let size = arr.length;
+
+        // 初始化堆，i 从最后一个父节点开始调整，直到节点均调整完毕
+        for (let i = Math.floor(size / 2) - 1; i >= 0; i--) {
+            heapify(arr, i, size);
+        }
+        // 堆排序：先将第一个元素和已拍好元素前一位作交换，再重新调整堆，直到排序完毕
+        for (let i = size - 1; i > 0; i--) {
+            [arr[0], arr[i]] = [arr[i], arr[0]]
+            size -= 1;
+            heapify(arr, 0, size);
+        }
+
+        return arr;
+    }
+
+    function heapify(arr, index, size) {
+        let largest = index;
+        let left = 2 * index + 1;
+        let right = 2 * index + 2;
+
+        if (left < size && arr[left] > arr[largest]) {
+            largest = left;
+        }
+        if (right < size && arr[right] > arr[largest]) {
+            largest = right;
+        }
+        if (largest !== index) {
+            [arr[index], arr[largest]] = [arr[largest], arr[index]]
+            heapify(arr, largest, size);
+        }
+    }
+    console.log(heapSort(arr));
+
+    // function heapSort2(arr) {
+    //     const size = arr.length
+    //
+    //     for (let i = Math.floor(size / 2); i >= 0; i--) {
+    //         heapify2(i, size)
+    //     }
+    //     for (let i = size - 1; i > 0; i--) {
+    //         [arr[0], arr[i]] = [arr[i], arr[0]]
+    //         heapify2(0, i)
+    //     }
+    //     return arr
+    // }
+    //
+    // function heapify2(start, end) {
+    //     const dad = start
+    //     let son = dad * 2 + 1
+    //
+    //     if (son >= end) {return 0}
+    //
+    //     if (son + 1 < end && arr[son] < arr[son + 1]) {
+    //         son += 1
+    //     }
+    //     if (arr[dad] <= arr[son]) {
+    //         [arr[son], arr[dad]] = [arr[dad], arr[son]]
+    //         heapify(son, end)
+    //     }
+    //
+    //     return 0
+    // }
+
+</script>
+</body>
+</html>

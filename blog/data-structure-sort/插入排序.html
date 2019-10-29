@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+
+<body>
+  <script>
+    const arr = [91, 60, 96, 7, 35, 65, 10, 65, 9, 30, 20, 31, 77, 81, 24];
+    function insertSort(arr) {
+      // 注意循环次数，因为是判断i+1，所以长度要减1
+      for (let i = 0; i < arr.length - 1; i++) {
+        // debugger
+        let temp = arr[i + 1];
+        let index = i;
+        // 注意判断条件是用temp进行判断
+        while (temp < arr[index]) {
+          arr[index + 1] = arr[index];
+          index--;
+        }
+        arr[index + 1] = temp;
+      }
+      return arr
+    }
+    console.log(insertionSort(arr))
+
+    // 利用二分查找对其进行优化
+    function binarySearch(arr, maxIndex, value) {
+      let min = 0
+      let max = maxIndex
+      while (min <= max) {
+        const mid = Math.floor((min + max) / 2)
+
+        if (arr[mid] <= value) {
+          min = mid + 1
+        } else {
+          max = mid - 1
+        }
+      }
+      return min
+    }
+    function insertionSort2(arr) {
+      for (let i = 1, len = arr.length; i < len; i++) {
+        const temp = arr[i]
+        // (0, i-1)区间内为已经排好序的数组,所以直接用二分查找快速找到插入的位置
+        const insertIndex = binarySearch(arr, i - 1, arr[i])
+
+        for (let preIndex = i - 1; preIndex >= insertIndex; preIndex--) {
+          arr[preIndex + 1] = arr[preIndex]
+        }
+        arr[insertIndex] = temp
+      }
+      return arr
+    }
+    console.log(insertionSort2(arr))
+  </script>
+</body>
+
+</html>

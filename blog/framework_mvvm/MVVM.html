@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+
+<body>
+  <div id="app">
+    <input type="text" v-model="school.name">
+    <div>{{ school.name }}</div>
+    <div>{{ school.age }}</div>
+    <!-- 如果数据不变化,视图不刷新 -->
+    <div>{{ getNewName }}</div>
+    <button v-on:click="change">点击</button>
+    <div v-html="message"></div>
+  </div>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
+  <!-- <script src="./MVVM.js"></script> -->
+  <script src="./MyVue.js"></script>
+  <script type="text/javascript">
+    let vm = new Vue({
+      el: '#app',
+      data: {
+        school: {
+          name: 'HUST',
+          age: '65'
+        },
+        message: `<h1>text</h1>`
+      },
+      computed: {
+        getNewName() {
+          return this.school.name + ' school'
+        }
+      },
+      methods: {
+        change() {
+          this.school.name = 'baotao';
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
+
+

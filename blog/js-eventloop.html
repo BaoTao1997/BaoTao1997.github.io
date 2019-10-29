@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>JS事件循环 | BaoTao的前端日志</title>
+    <meta name="description" content="欢迎访问我的前端日志">
+    <link rel="icon" href="/hero.png">
+    
+    <link rel="preload" href="/assets/css/0.styles.1a992bd3.css" as="style"><link rel="preload" href="/assets/js/app.f225858c.js" as="script"><link rel="preload" href="/assets/js/2.672550d7.js" as="script"><link rel="preload" href="/assets/js/29.3deeede2.js" as="script"><link rel="prefetch" href="/assets/js/10.c2729db0.js"><link rel="prefetch" href="/assets/js/11.6652c16a.js"><link rel="prefetch" href="/assets/js/12.c99151b5.js"><link rel="prefetch" href="/assets/js/13.c20a05a6.js"><link rel="prefetch" href="/assets/js/14.1ef90bc5.js"><link rel="prefetch" href="/assets/js/15.48e33afe.js"><link rel="prefetch" href="/assets/js/16.9480cdd8.js"><link rel="prefetch" href="/assets/js/17.2dbe7a92.js"><link rel="prefetch" href="/assets/js/18.d2ff3f51.js"><link rel="prefetch" href="/assets/js/19.bad3ad9a.js"><link rel="prefetch" href="/assets/js/20.f54ae634.js"><link rel="prefetch" href="/assets/js/21.fad4d162.js"><link rel="prefetch" href="/assets/js/22.8ce49b77.js"><link rel="prefetch" href="/assets/js/23.191fcec1.js"><link rel="prefetch" href="/assets/js/24.5d911dd7.js"><link rel="prefetch" href="/assets/js/25.92e6ee1b.js"><link rel="prefetch" href="/assets/js/26.2e6ac599.js"><link rel="prefetch" href="/assets/js/27.771ef2ee.js"><link rel="prefetch" href="/assets/js/28.9ddf0721.js"><link rel="prefetch" href="/assets/js/3.5f2ab74c.js"><link rel="prefetch" href="/assets/js/30.fe8bff52.js"><link rel="prefetch" href="/assets/js/31.1858abcd.js"><link rel="prefetch" href="/assets/js/32.bfb29c32.js"><link rel="prefetch" href="/assets/js/33.a2ae8076.js"><link rel="prefetch" href="/assets/js/34.531e6b81.js"><link rel="prefetch" href="/assets/js/35.645bc314.js"><link rel="prefetch" href="/assets/js/36.56d7c6c2.js"><link rel="prefetch" href="/assets/js/37.6ea9bf2e.js"><link rel="prefetch" href="/assets/js/38.2c569e14.js"><link rel="prefetch" href="/assets/js/39.0fbb6fc9.js"><link rel="prefetch" href="/assets/js/4.43a614f9.js"><link rel="prefetch" href="/assets/js/40.a2e40f8e.js"><link rel="prefetch" href="/assets/js/41.8de6a957.js"><link rel="prefetch" href="/assets/js/42.f34c83ed.js"><link rel="prefetch" href="/assets/js/43.5124ce0a.js"><link rel="prefetch" href="/assets/js/44.5148b76a.js"><link rel="prefetch" href="/assets/js/45.0482d6c2.js"><link rel="prefetch" href="/assets/js/46.dca6e042.js"><link rel="prefetch" href="/assets/js/47.d3d60350.js"><link rel="prefetch" href="/assets/js/48.c5d4232b.js"><link rel="prefetch" href="/assets/js/49.23efdb3a.js"><link rel="prefetch" href="/assets/js/5.c06abc86.js"><link rel="prefetch" href="/assets/js/50.143a9543.js"><link rel="prefetch" href="/assets/js/51.67b5b689.js"><link rel="prefetch" href="/assets/js/52.0a3fb16a.js"><link rel="prefetch" href="/assets/js/6.13d9ab35.js"><link rel="prefetch" href="/assets/js/7.d11a37f8.js"><link rel="prefetch" href="/assets/js/8.69f4770c.js"><link rel="prefetch" href="/assets/js/9.3a968c29.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.1a992bd3.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">BaoTao的前端日志</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/blog/" class="nav-link router-link-active">博客</a></div><div class="nav-item"><a href="/interview/" class="nav-link">面试题</a></div><div class="nav-item"><a href="/book/" class="nav-link">阅读</a></div><div class="nav-item"><a href="/project/" class="nav-link">项目</a></div><div class="nav-item"><a href="/resume/" class="nav-link">简历</a></div> <a href="https://github.com/BaoTao1997" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/blog/" class="nav-link router-link-active">博客</a></div><div class="nav-item"><a href="/interview/" class="nav-link">面试题</a></div><div class="nav-item"><a href="/book/" class="nav-link">阅读</a></div><div class="nav-item"><a href="/project/" class="nav-link">项目</a></div><div class="nav-item"><a href="/resume/" class="nav-link">简历</a></div> <a href="https://github.com/BaoTao1997" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>前端工程化与设计模式</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/blog/engineering-optimize.html" class="sidebar-link">web性能优化</a></li><li><a href="/blog/pattern-pub_sub.html" class="sidebar-link">订阅发布模式和EventEmitter</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Framework</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/blog/framework-mvvm.html" class="sidebar-link">动手实现一个简单的MVVM</a></li><li><a href="/blog/framework-vue_curd.html" class="sidebar-link">Vue的增删改查</a></li><li><a href="/blog/framework-vue-lazyload.html" class="sidebar-link">从Vue-lazyload看图片懒加载</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>网络协议</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/blog/osi-tcp.html" class="sidebar-link">TCP连接</a></li><li><a href="/blog/osi-status_code.html" class="sidebar-link">HTTP状态码解析</a></li><li><a href="/blog/osi-http_header.html" class="sidebar-link">HTTP报文解析</a></li><li><a href="/blog/osi-safety.html" class="sidebar-link">Web安全</a></li><li><a href="/blog/osi-login.html" class="sidebar-link">Web登录鉴权</a></li><li><a href="/blog/osi-cache.html" class="sidebar-link">浏览器缓存策略</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>数据结构与算法</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/blog/data-structure-sort.html" class="sidebar-link">排序算法</a></li><li><a href="/blog/data-structure-binarytree.html" class="sidebar-link">二叉树</a></li><li><a href="/blog/data-structure-linkList.html" class="sidebar-link">链表</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>CSS</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/blog/css-repaint.html" class="sidebar-link">CSS的repaint和reflow</a></li><li><a href="/blog/css-self-adaption.html" class="sidebar-link">CSS自适应</a></li><li><a href="/blog/css-tips.html" class="sidebar-link">CSS技巧</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>JS</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/blog/js-regex.html" class="sidebar-link">正则表达式</a></li><li><a href="/blog/js-prototype.html" class="sidebar-link">JS原型链与原型</a></li><li><a href="/blog/js-promise.html" class="sidebar-link">手写符合Promise/A+的Promise</a></li><li><a href="/blog/js-eventloop.html" class="active sidebar-link">JS事件循环</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blog/js-eventloop.html#settimeout" class="sidebar-link">setTimeout</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blog/js-eventloop.html#一、settimeout-初现" class="sidebar-link">一、setTimeout 初现</a></li><li class="sidebar-sub-header"><a href="/blog/js-eventloop.html#二、settimeout-初识" class="sidebar-link">二、setTimeout 初识</a></li><li class="sidebar-sub-header"><a href="/blog/js-eventloop.html#三、settimeout-再遇" class="sidebar-link">三、setTimeout 再遇</a></li><li class="sidebar-sub-header"><a href="/blog/js-eventloop.html#四、settimeout-相知" class="sidebar-link">四、setTimeout 相知</a></li><li class="sidebar-sub-header"><a href="/blog/js-eventloop.html#五、settimeout-相熟" class="sidebar-link">五、setTimeout 相熟</a></li></ul></li><li class="sidebar-sub-header"><a href="/blog/js-eventloop.html#promise" class="sidebar-link">promise</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blog/js-eventloop.html#一、promise-初现" class="sidebar-link">一、promise 初现</a></li><li class="sidebar-sub-header"><a href="/blog/js-eventloop.html#二、promise-初识" class="sidebar-link">二、promise 初识</a></li><li class="sidebar-sub-header"><a href="/blog/js-eventloop.html#三、promise-settimeout" class="sidebar-link">三、promise&amp;setTimeout</a></li></ul></li><li class="sidebar-sub-header"><a href="/blog/js-eventloop.html#async" class="sidebar-link">Async</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blog/js-eventloop.html#一、async" class="sidebar-link">一、async</a></li><li class="sidebar-sub-header"><a href="/blog/js-eventloop.html#二、await" class="sidebar-link">二、await</a></li></ul></li></ul></li><li><a href="/blog/js-typescript.html" class="sidebar-link">TypeScript 在Vue项目中的使用总结</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>运维与多人协作</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/blog/operation-git.html" class="sidebar-link">Git常规操作与Linux命令</a></li><li><a href="/blog/operation-blog.html" class="sidebar-link">搭建持续集成的个人博客</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="settimeout-promise-async"><a href="#settimeout-promise-async" aria-hidden="true" class="header-anchor">#</a> setTimeout&amp;Promise&amp;Async</h1> <h2 id="settimeout"><a href="#settimeout" aria-hidden="true" class="header-anchor">#</a> <strong>setTimeout</strong></h2> <h3 id="一、settimeout-初现"><a href="#一、settimeout-初现" aria-hidden="true" class="header-anchor">#</a> 一、setTimeout 初现</h3> <div class="language- line-numbers-mode"><pre class="language-text"><code>定义：setTimeout() 方法用于在指定的毫秒数后调用函数或计算表达式。
+复制代码
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>语法：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>    setTimeout(code, milliseconds, param1, param2, ...)
+    setTimeout(function, milliseconds, param1, param2, ...)
+复制代码
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><table><thead><tr><th>参数</th> <th>描述</th></tr></thead> <tbody><tr><td>code/function</td> <td>必需。要调用一个代码串，也可以是一个函数</td></tr> <tr><td>milliseconds</td> <td>可选。执行或调用 code/function 需要等待的时间，以毫秒计。默认为 0。</td></tr> <tr><td>param1, param2, ...</td> <td>可选。 传给执行函数的其他参数（IE9 及其更早版本不支持该参数）。</td></tr></tbody></table> <h3 id="二、settimeout-初识"><a href="#二、settimeout-初识" aria-hidden="true" class="header-anchor">#</a> 二、setTimeout 初识</h3> <p><strong>第一种</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>setTimeout(fn1, 1000);
+setTimeout(fn2, 2000);
+setTimeout(function fn3(){console.log(3);}, 3000);
+setTimeout(function (){console.log(4);}, 4000);
+function fn1(){
+    console.log(1);
+}
+
+var fn2 = function(){
+    console.log(2);
+}
+//输出结果如下：
+// 分别延迟1,2,3,4秒之后输出 1 2 3 4
+复制代码
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br></div></div><p><strong>第二种</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>setTimeout(fn1(), 1000);
+setTimeout(fn2(), 2000);
+setTimeout(function fn3(){console.log(3);}(), 3000);
+setTimeout(function (){console.log(4);}(), 4000);
+function fn1(){
+    console.log(1);
+}
+
+var fn2 = function(){
+    console.log(2);
+}
+
+//输出结果如下：
+//直接输出 1 2 3 4  ,没有延迟
+复制代码
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br></div></div><p>按照定义：setTimeout() 方法用于在指定的毫秒数后调用函数或计算表达式。第一种方法在指定毫秒数之后执行，第二种方法没有在指定毫秒数后执行，而是立刻执行。所以我个人将其分成正规军setTimeout和杂牌军setTimeout，方便后面记忆。</p> <p>正规军我们在后面详细讲，现在先了解下杂牌军： 由于setTimeout()的第一个参数是<strong>直接可执行的代码</strong>，所以它没有任何延迟效果，如下：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>setTimeout(console.log(1), 1000);
+
+//输出结果如下：
+//直接输出 1 ,没有延迟
+复制代码
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><h3 id="三、settimeout-再遇"><a href="#三、settimeout-再遇" aria-hidden="true" class="header-anchor">#</a> 三、setTimeout 再遇</h3> <div class="language- line-numbers-mode"><pre class="language-text"><code>setTimeout(function(a,b){
+    console.log(a+b);
+},1000,4,5);
+
+//输出结果如下：
+//9
+复制代码
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><p>从第三个参数开始，依次用来表示第一个参数（回调函数）传入的参数 一些古老的浏览器是不支持，可以用bind或apply方法来解决,如下：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>setTimeout(function(a,b){
+    console.log(a+b);
+}.bind(this,4,5),1000);
+
+//输出结果如下：
+//9
+复制代码
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><p>第一个参数表示将原函数的this绑定全局作用域，第二个参数开始是要传入原函数的参数 当调用绑定函数时,绑定函数会以创建它时传入bind()方法的第一个参数作为 this</p> <h3 id="四、settimeout-相知"><a href="#四、settimeout-相知" aria-hidden="true" class="header-anchor">#</a> 四、setTimeout 相知</h3> <p>对于setTimeout()的this问题，网上有很多的文章，我就不班门弄斧了，后面若总结的够到位了就写一篇文章介绍下。</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>console.log(1);
+setTimeout(function (){
+    console.log(2);
+},3000);
+console.log(3);
+//输出结果如下：
+//1 3 2
+复制代码
+console.log(1);
+setTimeout(function (){
+    console.log(2);
+},0);
+console.log(3);
+
+//输出结果如下：
+//1 3 2
+复制代码
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br></div></div><p>这里有些同学可能会疑惑，第一段代码延迟三秒之后执行输出1，3，2可以理解，但是第二段代码延迟0秒执行为什么也是会输出1，3，2呢？</p> <p>这里就需要提到“任务队列”这个概念了，由于JavaScript是一种单线程的语言，也就是说同一时间只能做一件事情。但是HTML5提出Web Worker标准，允许JavaScript脚本创建多个线程，但是子线程完全受主线程控制。 单线程意味着，所有的任务需要排队，前一个任务结束，才会执行后一个任务。如果前一个任务耗时很长，后一个任务就不得不一直等待。</p> <p>所以设计者将任务分成两种，一种 <strong>同步任务</strong> ，另一种是 <strong>异步任务</strong> 。 同步任务是，在主线程上排队执行的任务，只有前一个执行完，才能执行后一个； 异步任务是，不进入主线程，而是进入“任务队列”的任务，只有“任务队列”通知主线程，某个异步任务可以执行了，该任务才会进入主线程执行。</p> <p>“任务队列”除了放置任务事件，还可以放置定时事件。即指定某些代码在多少时间之后执行。知道了这些我们基本上就可以解释上面两段代码为什么会输出这样的结果了。</p> <p>第一段代码，因为setTimeout()将回调函数推迟了3000毫秒之后执行。如果将setTimeout()第二个参数设置为0，就表示当前代码执行完以后，立刻执行（0毫秒间隔）指定的回调函数。所以只有在打印出1和3之后，系统才会执行“任务队列”中的回调函数。</p> <p>总之，setTimeout(fn,0)的含义是，指定某个任务在主线程最早可得的空闲时间执行，也就是说，尽可能早得执行。它在&quot;任务队列&quot;的尾部添加一个事件，因此要等到同步任务和&quot;任务队列&quot;现有的事件都处理完，才会得到执行。强调一遍：它在&quot;任务队列&quot;的尾部添加一个事件，记住是尾部，添加到&quot;任务队列&quot;尾部，所以后最后执行。</p> <p>HTML5标准规定了setTimeout()的第二个参数的最小值（最短间隔），不得低于4毫秒，如果低于这个值，就会自动增加。在此之前，老版本的浏览器都将最短间隔设为10毫秒。</p> <p>setTimeout()只是将事件插入了&quot;任务队列&quot;，必须等到当前代码（执行栈）执行完，主线程才会去执行它指定的回调函数。要是当前代码耗时很长，有可能要等很久，所以并没有办法保证，回调函数一定会在setTimeout()指定的时间执行。所以他们有时候不一定会守时的。守时的都是好孩子！</p> <p>阮一峰老师对任务队列有详细的介绍，详情<a href="https://link.juejin.im/?target=http%3A%2F%2Fwww.ruanyifeng.com%2Fblog%2F2014%2F10%2Fevent-loop.html" target="_blank" rel="noopener noreferrer">戳这里<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <h3 id="五、settimeout-相熟"><a href="#五、settimeout-相熟" aria-hidden="true" class="header-anchor">#</a> 五、setTimeout 相熟</h3> <p>了解了上面的内容，我们得拉出来溜溜了，直接上测试题：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>    console.log(1);
+    setTimeout(fn1, 1000);
+    setTimeout(function(){
+        console.log(2);
+    },0);
+    setTimeout(console.log(3),2000);
+    function fn1(){
+        console.log(4);
+    }
+    console.log(5);
+    //输出结果：
+    //1 3 5 2 4(4会延迟一秒)
+复制代码
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br></div></div><blockquote><p>1.先执行主线程，打印出1；</p></blockquote> <blockquote><p>2.遇到第一个setTimeout,1秒后执行回调函数，所以添加到任务队列；</p></blockquote> <blockquote><p>3.遇到第二个setTimeout，0秒后执行回调函数，再次添加到任务队列；</p></blockquote> <blockquote><p>4.遇到第三个setTimeout，这个第一个参数不是回调函数，而是一个直接可执行的语句，记得我前面讲过的这个是个杂牌军，它不会添加到任务队列也不会延迟执行而是直接执行，所以打印出3；</p></blockquote> <blockquote><p>5.继续执行打印出5；</p></blockquote> <blockquote><p>6.第二个setTimeout，由于是0秒延迟所以主线程任务结束立刻执行，所以打印出2；</p></blockquote> <blockquote><p>7.最后执行第一个setTimeout，一秒后打印出4.</p></blockquote> <p>上面的试题明白之后我们就可以明白下面的代码了：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>    var timeoutId = setTimeout(function (){
+        console(&quot;hello World&quot;);
+    },1000);
+   
+    clearTimeout(timeoutId);
+    //输出结果：
+    //不会打印出hello World
+复制代码
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div><blockquote><p>1先执行主线程，遇到setTimeout并且第一个参数是回调函数，添加到任务队列，1秒后执行；</p></blockquote> <blockquote><p>2.执行clearTimeout，则还未等到代码执行就 取消了定时器，所以不会打印出任何内容。</p></blockquote> <p>下面我们学习下promise</p> <h2 id="promise"><a href="#promise" aria-hidden="true" class="header-anchor">#</a> <strong>promise</strong></h2> <h3 id="一、promise-初现"><a href="#一、promise-初现" aria-hidden="true" class="header-anchor">#</a> 一、promise 初现</h3> <p>ES6 将promise写进了语言标准，统一了用法，原生提供了Promise对象。 详细介绍<a href="https://link.juejin.im/?target=http%3A%2F%2Fes6.ruanyifeng.com%2F%23docs%2Fpromise" target="_blank" rel="noopener noreferrer">戳这里<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>阮一峰老师进行了详细的说明；</p> <p>这里我简单的说下，我后面会使用到的内容： Promise 新建后就会立即执行，然后，then方法接受两个回调函数作为参数，将在当前脚本所有同步任务执行完才会执行。记住这里then之后的回调函数才异步执行的，所以会添加到任务队列中。 第一个回调函数是Promise对象的状态变为resolved时调用，第二个回调函数是Promise对象的状态变为rejected时调用。其中，第二个函数是可选的，不一定要提供。</p> <h3 id="二、promise-初识"><a href="#二、promise-初识" aria-hidden="true" class="header-anchor">#</a> 二、promise 初识</h3> <p>下面我将以代码片段的方式，逐渐看出现的各种面试题，加深大家的理解</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>    console.log(1);
+    new Promise((resolve,reject)=&gt;{
+        console.log(2);
+        resolve()
+    }).then( ()=&gt;{
+        console.log(3)
+    },()=&gt;{
+        console.log(4);
+    });
+    console.log(5);
+
+    //输出结果：
+    //1 2 5 3
+
+复制代码
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br></div></div><blockquote><p>1.先执行主线程，打印出1；</p></blockquote> <blockquote><ol><li>Promise 新建后就会立即执行，所以打印出2，执行resolve表明执行成功回调；</li></ol></blockquote> <blockquote><ol><li>then的成功执行的是回调函数，所以是异步执行，添加到任务队列之中，暂不执行；</li></ol></blockquote> <blockquote><ol><li>继续执行主线程，打印出5；</li></ol></blockquote> <blockquote><ol><li>主线程结束之后执行任务队列中的回调函数打印出3</li></ol></blockquote> <div class="language- line-numbers-mode"><pre class="language-text"><code>    console.log(1);
+    new Promise((resolve,reject)=&gt;{
+        console.log(2);
+        reject()
+    }).then( ()=&gt;{
+        console.log(3)
+    },()=&gt;{
+        console.log(4);
+    });
+    console.log(5);
+
+    //输出结果：
+    //1 2 5 4
+
+复制代码
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br></div></div><p>这个例子同上，只是执行的是异步的失败的回调函数，所以最后一个打印出的是4</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>    console.log(1);
+    new Promise((resolve,reject)=&gt;{
+        console.log(2);
+    }).then( ()=&gt;{
+        console.log(3)
+    });
+    console.log(4);
+
+    //输出结果：
+    //1 2 4
+
+复制代码
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br></div></div><p>这个例子中打印出4之后没有打印3，是因为promise中没有指定是执行成功回调还是失败的回调所以不会执行then的回调函数</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>    console.log(1);
+    new Promise((resolve,reject)=&gt;{
+        console.log(2);
+    }).then(console.log(3));
+    console.log(4);
+
+    //输出结果：
+    //1 2 3 4
+
+复制代码
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br></div></div><p>看到这个有同学可能就懵了，怎么回事怎么是1234而不是1243呢，这需要考察同学们是否细心呢，看这里then中的直接是可执行的语句而不是回调函数，所以会出现这种情况，异步任务必须是回调函数 如果不是回调函数就是同步的了</p> <blockquote><p>1.先执行主线程，打印出1；</p></blockquote> <blockquote><ol><li>Promise 新建后就会立即执行，所以打印出2；</li></ol></blockquote> <blockquote><ol><li>then中不是回调函数而是直接可执行的语句，所以直接执行打印出3；</li></ol></blockquote> <blockquote><ol><li>继续执行主线程，打印出4；</li></ol></blockquote> <p>嘻嘻，看了上面的这些例子相信大家已经对promise理解了不少，所以我们继续深入看看下面这个例子，输出的结果是什么呢？</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>    console.log(1);
+    new Promise((resolve,reject)=&gt;{
+        console.log(2);
+        resolve();
+        console.log(3);
+    }).then( ()=&gt;{
+        console.log(4)
+    });
+    console.log(5);
+
+    //输出结果：
+    //1 2 3 5 4
+
+复制代码
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br></div></div><p>大家有没有写对呢？ 这里大家的疑问估计就是resolve()之后的console.log(3);这个地方咯 这是因为上面代码中，调用resolve()以后，后面的console.log(3)还是会执行，并且会首先打印出来。因为立即 resolved 的 Promise 是在本轮事件循环的末尾执行，总是晚于本轮循环的同步任务。</p> <p>所以如果想让，调用resolve或reject以后，Promise 的使命完成，后继操作应该放到then方法里面，而不应该直接写在resolve或reject的后面。所以，最好在它们前面加上return语句，这样就不会有意外。如下：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>    console.log(1);
+    new Promise((resolve,reject)=&gt;{
+        console.log(2);
+        return resolve();
+        console.log(3);
+    }).then( ()=&gt;{
+        console.log(4)
+    });
+    console.log(5);
+    //输出结果：
+    //1 2 5 4
+复制代码
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br></div></div><p>这样console.log(3);是不会执行的。</p> <h3 id="三、promise-settimeout"><a href="#三、promise-settimeout" aria-hidden="true" class="header-anchor">#</a> 三、promise&amp;setTimeout</h3> <p>下面我们在来看如果promise&amp;setTimeout同时出现会发生什么样的情况呢？如下：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>    console.log('a');
+    setTimeout(function() {console.log('b')}, 0);
+    new Promise((resolve, reject) =&gt; {
+        for(let i=0; i&lt;10000000; i++) {
+            if(i==999999) {
+                console.log('c');
+                resolve();
+            }
+        }
+        console.log('d');
+    }).then(() =&gt; {
+        console.log('e');
+    });
+    console.log('f');
+    //输出结果：
+    // a c d f e b
+复制代码
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br></div></div><p>大家是不是有些晕，哈哈哈，别着急这里我们得在拓展一点新概念，方便我们理解：事件循环、宏任务和微任务</p> <p>JavaScript的一大特点就是单线程，而这个线程中拥有唯一的一个事件循环。</p> <p>一个线程中，事件循环是唯一的，但是任务队列可以拥有多个。</p> <p>任务队列又分为macro-task（宏任务）与micro-task（微任务），它们又被称为task与jobs。</p> <p>宏任务（macro-task）大概包括：script(整体代码), setTimeout, setInterval, setImmediate, I/O, UI rendering。</p> <p>微任务（micro-task）大概包括: process.nextTick, Promise, MutationObserver(html5新特性)</p> <p>事件循环的顺序，决定了JavaScript代码的执行顺序。</p> <p>它从script(整体代码)开始第一次循环。之后全局上下文进入函数调用栈。</p> <p>直到调用栈清空(只剩全局)，然后执行所有的微任务（micro-task）。</p> <p>当所有可执行的微任务（micro-task）执行完毕之后。</p> <p>循环再次从宏任务（macro-task）开始，找到其中一个任务队列执行完毕，然后再执行所有的微任务（micro-task），这样一直循环下去。</p> <p>注：本篇使用的宏任务（macro-task）：script(整体代码), setTimeout, setInterval；微任务（micro-task）： Promise。至于其他的浏览器没有，引用了node.js的API，如： setImmediate、 process.nextTick等，至于他们的执行顺序可参考<a href="https://link.juejin.im/?target=https%3A%2F%2Fwww.jianshu.com%2Fp%2F12b9f73c5a4f" target="_blank" rel="noopener noreferrer">这篇文章<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <p>比如上述例子，不同类型的任务会分别进入到他们所属类型的任务队列，比如所有setTimeout()的回调都会进入到setTimeout任务队列，既宏任务（macro-task）;所有then()回调都会进入到then队列,既微任务（micro-task）。</p> <p>当前的整体代码我们可以认为是宏任务。事件循环从当前整体代码开始第一次事件循环，然后再执行队列中所有的微任务，当微任务执行完毕之后，事件循环再找到其中一个宏任务队列并执行其中的所有任务，然后再找到一个微任务队列并执行里面的所有任务，就这样一直循环下去。这就是我所理解的事件循环。</p> <p>分析上面例子：</p> <blockquote><p>1.首先执行整体代码，第一个打印出来a</p></blockquote> <blockquote><p>2.执行到第一个setTimeout时，发现它是宏任务，此时会新建一个setTimeout类型的宏任务队列并派发当前这个setTimeout的回调函数到刚建好的这个宏任务队列中去</p></blockquote> <blockquote><p>3.再执行到new Promise，Promise构造函数中的第一个参数在new的时候会直接执行，因此不会进入任何队列，所以第三个输出是c</p></blockquote> <blockquote><p>4.执行完resolve()之后，继续向后执行，打印出d</p></blockquote> <blockquote><p>5.上面有说到Promise.then是微任务，那么这里会生成一个Promise.then类型的微任务队列，这里的then回调会被push进这个队列中</p></blockquote> <blockquote><p>6.再向后走打印出f</p></blockquote> <blockquote><p>7.第一轮事件循环的宏任务执行完成（整体代码看做宏任务）。此时微任务队列中只有一个Promise.then类型微任务队列。宏任务队列中也只有一个setTimeout类型的宏任务队列。</p></blockquote> <blockquote><p>8.下面执行第一轮事件循环的微任务，很明显，会打印出e,至此第一轮事件循环完成</p></blockquote> <blockquote><p>9.开始第二轮事件循环：执行setTimeout类型队列（宏任务队列）中的所有任务，只有一个任务，所以打印出b</p></blockquote> <blockquote><p>10.第二轮事件的宏任务结束，这个事件循环结束。</p></blockquote> <p>再来一个你中有我我中有你的超级例子，体验下到处是坑的试题，嘿嘿;-)</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>    console.log('a');
+
+    setTimeout(function () {
+        console.log('b')
+        new Promise(resolve=&gt; {
+            console.log('c')
+            resolve()
+        }).then(()=&gt; {
+            console.log('d')
+        })
+    },2000);
+
+
+    new Promise((resolve,reject)=&gt;{
+        console.log('e');
+        resolve();
+        console.log('f');
+    }).then(()=&gt;{
+        console.log('g')
+    });
+
+    console.log('h');
+
+    new Promise((resolve,reject)=&gt;{
+        setTimeout(function () {
+            console.log('i');
+        },0);
+    }).then(console.log('j'));
+
+    setTimeout(function () {
+        console.log('k')
+        new Promise(resolve=&gt;{
+            console.log('l')
+            return resolve()
+            console.log('m')
+        }).then(()=&gt;{
+            console.log('n')
+        })
+    },1000);
+
+    console.log('p');
+
+    //输出结果：
+    //a e f h j p g i
+    //延迟1s 输出：k l n 
+    //再延迟1s 输出：b c d
+复制代码
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br></div></div><blockquote><p>1.首先执行整体代码，第一个打印出来&quot;a&quot;;</p></blockquote> <blockquote><p>2.执行到第一个setTimeout时，发现它是宏任务，此时会新建一个setTimeout类型的宏任务队列并派发当前这个setTimeout的回调函数到刚建好的这个宏任务队列中去，并且轮到它执行时要延迟2秒后再执行;</p></blockquote> <blockquote><p>3.执行到第一个new Promise，Promise构造函数中的第一个参数在new的时候会直接执行，因此不会进入任何队列，所以第二个输出是&quot;e&quot;，resolve()之后的语句会继续执行，所以第三个输出的是&quot;f&quot;,Promise.then是微任务，那么这里会生成一个Promise.then类型的微任务队列，这里的then回调会被push进这个队列中;</p></blockquote> <blockquote><p>4.再执行整体代码，第四个打印出来&quot;h&quot;;</p></blockquote> <blockquote><p>5.执行到第一个new Promise，Promise构造函数中的第一个参数在new的时候会直接执行，但是这个是一个setTimeout，发现它是宏任务，派发它的回调到上面setTimeout类型的宏任务队列中去。后面Promise.then中是一个可执行的代码，并不是回调函数，所以会直接的执行，并不会添加到微任务中去，所以第五个输出的是：&quot;j&quot;;</p></blockquote> <blockquote><p>6.执行到第二个setTimeout时，发现它是宏任务，派发它的回调到上面setTimeout类型的宏任务队列中去，但是会延迟1s执行；</p></blockquote> <blockquote><p>7.执行整体代码，第六个输出的是&quot;p&quot;;</p></blockquote> <blockquote><p>8.第一轮事件循环的宏任务执行完成（整体代码看做宏任务）。此时微任务队列中只有一个Promise.then类型微任务队列，它里面有一个任务;宏任务队列中也只有一个setTimeout类型的宏任务队列;</p></blockquote> <blockquote><p>9.下面执行第一轮事件循环的微任务，很明显，第七个输出的是：&quot;g&quot;。此时第一轮事件循环完成;</p></blockquote> <blockquote><p>10.开始第二轮事件循环：执行setTimeout类型队列（宏任务队列）中的所有任务。发现有的有延时有的没有延时，所以先执行延时最短的宏任务；</p></blockquote> <blockquote><p>11.执行setTimeout，第八个输出的是&quot;i&quot;;</p></blockquote> <blockquote><p>12.紧接着执行延迟1s的setTimeout，所以延迟一秒之后第九个输出的是：&quot;k&quot;;</p></blockquote> <blockquote><p>13.之后遇到new Promise，Promise构造函数中的第一个参数在new的时候会直接执行，因此不会进入任何队列，所以第十个输出是&quot;l&quot;，之后是一个return语句，所以后面的代码不会执行，&quot;m&quot;不会被输出出来；</p></blockquote> <blockquote><p>14.但这里发现了then，又把它push到上面已经被执行完的then队列中去，这里要注意，因为出现了微任务then队列，所以这里会执行该队列中的所有任务（此时只有一个任务），所以第十一个输出的是&quot;n&quot;;</p></blockquote> <blockquote><p>15.再延迟1s执行setTimeout，所以延迟二秒之后第十二个输出的是：&quot;b&quot;;</p></blockquote> <blockquote><p>16.之后遇到new Promise，Promise构造函数中的第一个参数在new的时候会直接执行，因此不会进入任何队列，所以第十三个输出是&quot;c&quot;；</p></blockquote> <blockquote><p>17.但这里又发现了then，又把它push到上面已经被执行完的then队列中去，这里要注意，因为出现了微任务then队列，所以这里会执行该队列中的所有任务（此时只有一个任务），所以第十四个输出的是&quot;d&quot;;</p></blockquote> <p>噗，终于完了，不知道大家有没有理解呢？ 生活就是这样，你以为度过了一个难关前面就是阳光大道，但现实就是这样，他会给你再来一个难题，接着看下面的代码，嘿嘿嘿~~~</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>    async function async1() {
+        console.log(&quot;a&quot;);
+        await  async2();
+        console.log(&quot;b&quot;);
+    }
+
+    async  function async2() {
+        console.log( 'c');
+    }
+
+    console.log(&quot;d&quot;);
+
+    setTimeout(function () {
+        console.log(&quot;e&quot;);
+    },0);
+
+    async1();
+
+    new Promise(function (resolve) {
+        console.log(&quot;x&quot;);
+        resolve();
+    }).then(function () {
+        console.log(&quot;y&quot;);
+    });
+
+    console.log('z');
+
+    //输出结果：
+    // d a c x z y b e
+复制代码
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br></div></div><p>是不是有点傻了，怎么又出现了async了，别慌别慌且听我慢慢道来，在说之前还得大家了解async，阮一峰老师对此有详细的介绍，详情<a href="https://link.juejin.im/?target=http%3A%2F%2Fes6.ruanyifeng.com%2F%23docs%2Fasync" target="_blank" rel="noopener noreferrer">戳这里<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <h2 id="async"><a href="#async" aria-hidden="true" class="header-anchor">#</a> Async</h2> <h3 id="一、async"><a href="#一、async" aria-hidden="true" class="header-anchor">#</a> 一、async</h3> <p>async的用法，它作为一个关键字放到函数前面，用于表示函数是一个异步函数，因为async就是异步的意思， 异步函数也就意味着该函数的执行不会阻塞后面代码的执行。</p> <p>我们先来观察下async的返回值，请看下面的代码：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>    async function testAsync() {
+        return &quot;hello async&quot;;
+    }
+
+    const result = testAsync();
+    console.log(result);
+
+    //输出结果：
+    // Promise { 'hello async' }
+复制代码
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br></div></div><p>看到这里我们知道了，saync输出的是一个promise对象</p> <p>async 函数（包含函数语句、函数表达式）会返回一个 Promise 对象，如果在函数中 return 一个直接量，async 会把这个直接量通过 Promise.resolve() 封装成 Promise 对象。</p> <p>那我们试下没有返回值会是怎么样呢？</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>    async function testAsync() {
+        console.log(&quot;hello async&quot;);
+    }
+
+    const result = testAsync();
+    console.log(result);
+
+    //输出结果：
+    // hello async
+    // Promise { undefined }
+复制代码
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br></div></div><p>会返回一个为空的promis对象</p> <h3 id="二、await"><a href="#二、await" aria-hidden="true" class="header-anchor">#</a> 二、await</h3> <p>从字面意思上看await就是等待，await 等待的是一个表达式，这个表达式的返回值可以是一个promise对象也可以是其他值。</p> <p>注意到 await 不仅仅用于等 Promise 对象，它可以等任意表达式的结果，所以，await 后面实际是可以接普通函数调用或者直接量的。</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>    function getSomething() {
+        return &quot;something&quot;;
+    }
+
+    async function testAsync() {
+        return Promise.resolve(&quot;hello async&quot;);
+    }
+
+    async function test() {
+        const v1 = await getSomething();
+        const v2 = await testAsync();
+        console.log(v1, v2);
+    }
+
+    test();
+
+    //输出结果：
+    // something hello async
+复制代码
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br></div></div><p>await 是个运算符，用于组成表达式，await 表达式的运算结果取决于它等的东西,如果它等到的不是一个 Promise 对象，那 await 表达式的运算结果就是它等到的东西。</p> <table><thead><tr><th>内容</th> <th>描述</th></tr></thead> <tbody><tr><td>语法</td> <td>[return_value] = await expression;</td></tr> <tr><td>表达式（expression）</td> <td>一个 Promise 对象或者任何要等待的值。</td></tr> <tr><td>返回值（return_value）</td> <td>返回 Promise 对象的处理结果。如果等待的不是 Promise 对象，则返回该值本身</td></tr></tbody></table> <p>但是当遇到await会怎么执行呢？</p> <p>async函数完全可以看作多个异步操作，包装成的一个 Promise 对象，而await命令就是内部then命令的语法糖。 当函数执行的时候，一旦遇到await就会先返回，等到异步操作完成，再接着执行函数体内后面的语句.</p> <p>即，</p> <p>当遇到async函数体内的 <code>await test();</code>时候，执行test()，然后得到返回值value（可以是promise也可以是其他值），组成<code>await value;</code>,若 value是promise对象时候，此时返回的Promise会被放入到任务队列中等待，await会让出线程，跳出 async函数，继续执行后续代码；若 value是其他值，只是不会被添加到任务队列而已，await也会让出线程，跳出 async函数，继续执行后续代码。</p> <p>明白了这些，我们分析上面最难的那部分代码：</p> <blockquote><p>1.首先执行整体代码，遇到两个saync函数，没有调用所以继续向下执行，所以第一个输出的是：&quot;d&quot;;</p></blockquote> <blockquote><p>2.执行到第一个setTimeout时，发现它是宏任务，此时会新建一个setTimeout类型的宏任务队列并派发当前这个setTimeout的回调函数到刚建好的这个宏任务队列中去，并且轮到它执行时要立刻执行;</p></blockquote> <blockquote><p>3.遇到async1()， async1函数调用，执行async1函数，第二个输出的是：&quot;a&quot;;</p></blockquote> <blockquote><p>4.然后执行到 await async2()，发现 async2 也是个 async 定义的函数，所以直接执行了“console.log('c')”。所以第三个输出的是：&quot;c&quot;;</p></blockquote> <blockquote><p>5.同时async2返回了一个Promise,请注意：此时返回的Promise会被放入到任务队列中等待，await会让出线程，接下来就会跳出 async1函数，继续往下执行！！！</p></blockquote> <blockquote><p>6.执行到 new Promise，前面说过了promise是立即执行的，所以第四个输出的是：&quot;x&quot;;</p></blockquote> <blockquote><p>7.然后执行到 resolve 的时候，resolve这个任务就被放到任务队列中等待，然后跳出Promise继续往下执行，所以第五个输出的是：&quot;z&quot;;</p></blockquote> <blockquote><p>8.现在调用栈空出来了，事件循环就会去任务队列里面取任务继续放到调用栈里面；</p></blockquote> <blockquote><p>9.取到的第一个任务，就是前面 async1 放进去的Promise，执行Promise时候，遇到resolve或者reject函数，这次会又被放到任务队列中等待，然后再次跳出 async1函数 继续下一个任务！！！</p></blockquote> <blockquote><p>10.接下来取到的下一个任务，就是前面 new Promise 放进去的 resolve回调，执行then，所以第六个输出的是：&quot;y&quot;;</p></blockquote> <blockquote><p>11.调用栈再次空出来了，事件循环就取到了下一个任务,async1 函数中的 async2返回的promise对象的resolve或者reject函数执行，因为 async2 并没有return任何东西，所以这个resolve的参数是undefined；</p></blockquote> <blockquote><p>12.此时 await 定义的这个 Promise 已经执行完并且返回了结果，所以可以继续往下执行 async1函数 后面的任务了，那就是“console.log('b')”，所以第七个输出的是：&quot;b&quot;;</p></blockquote> <blockquote><p>13.调用栈再次的空了出来终于执行setTimeout的宏任务，所以第八个输出的是：&quot;e&quot;</p></blockquote></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/BaoTao1997/edit/master/docs/blog/js-eventloop.md" target="_blank" rel="noopener noreferrer">帮助我完善这篇内容🙏</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <div class="last-updated"><span class="prefix">更新时间: </span> <span class="time">7/29/2019, 9:38:23 AM</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+        ←
+        <a href="/blog/js-promise.html" class="prev">
+          手写符合Promise/A+的Promise
+        </a></span> <span class="next"><a href="/blog/js-typescript.html">
+          TypeScript 在Vue项目中的使用总结
+        </a>
+        →
+      </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.f225858c.js" defer></script><script src="/assets/js/2.672550d7.js" defer></script><script src="/assets/js/29.3deeede2.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    // 选择一个增量来改进每次只移动一位的插入排序
+    const arr = [91, 60, 96, 7, 35, 65, 10, 65, 9, 30, 20, 31, 77, 81, 24]
+
+    function shellSort(arr) {
+        const len = arr.length
+        let gap = Math.floor(len / 2)
+
+        while (gap > 0) {
+            for (let i = gap; i < len; i++) {
+                const temp = arr[i]
+                let preIndex = i - gap
+
+                while (arr[preIndex] > temp) {
+                    arr[preIndex + gap] = arr[preIndex]
+                    preIndex -= gap
+                }
+                arr[preIndex + gap] = temp
+            }
+            gap = Math.floor(gap / 2)
+        }
+        return arr
+    }
+    console.log(shellSort(arr))
+
+    // 优化gap的取值序列
+    function shellSort2(arr) {
+        const len = arr.length
+        let gap = 1
+
+        while (gap < len / 3) {
+            gap = gap * 3 + 1
+        }
+        while (gap > 0) {
+            for (let i = gap; i < len; i++) {
+                const temp = arr[i]
+                let preIndex = i - gap
+
+                while (arr[preIndex] > temp) {
+                    arr[preIndex + gap] = arr[preIndex]
+                    preIndex -= gap
+                }
+                arr[preIndex + gap] = temp
+            }
+            gap = Math.floor(gap / 2)
+        }
+        return arr
+    }
+    console.log(shellSort2(arr))
+</script>
+</body>
+</html>
